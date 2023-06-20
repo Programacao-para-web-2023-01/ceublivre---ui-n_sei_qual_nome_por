@@ -1,3 +1,5 @@
+
+
 class Produto {
     nome: string
     preco: number
@@ -12,7 +14,7 @@ class Produto {
     // Returns the JSX for the table row
     getJSX() {
         return (
-            <tr>
+            <tr className="ItemProduto">
                 <td>{this.nome}</td>
                 <td>{this.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
                 <td>{this.quantidade}</td>
@@ -20,3 +22,5 @@ class Produto {
         )
     }
 }
+
+export default Produto

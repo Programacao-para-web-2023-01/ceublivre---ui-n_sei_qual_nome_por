@@ -1,5 +1,4 @@
-import Image from 'next/image'
-import Pedidos from './components/pedidos'
+import Pedidos from '../components/pedidos'
 
 export default function Home() {
   return (
