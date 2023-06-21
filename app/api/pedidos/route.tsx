@@ -6,6 +6,7 @@ export async function GET(request: Request) {
     return new Response(JSON.stringify(
         [
             new Pedido(
+                1,
                 new Date(2021, 5, 1),
                 [
                     new Produto('Produto 1', 1, 1),
@@ -18,6 +19,7 @@ export async function GET(request: Request) {
                 'Pendente'
             ),
             new Pedido(
+                2,
                 new Date(2021, 5, 2),
                 [
                     new Produto('Produto 4', 4, 4),
@@ -30,6 +32,7 @@ export async function GET(request: Request) {
                 'Pendente'
             ),
             new Pedido(
+                3,
                 new Date(2021, 5, 3),
                 [
                     new Produto('Produto 7', 7, 7),

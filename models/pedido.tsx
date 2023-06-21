@@ -1,6 +1,10 @@
+import { type } from 'os'
 import Produto from './produto'
 
+type PedidoUpdatedFun = { (newPedidoUpdated: boolean): void }
+
 class Pedido {
+    id: number
     data: Date
     produtos: Produto[]
     enderecoEntrega: string
@@ -8,13 +12,35 @@ class Pedido {
     valorTotal: number
     status: string
 
-    constructor(data: Date, produtos: Produto[], enderecoEntrega: string, valorFrete: number, valorTotal: number, status: string) {
+    private _setPedidoUpdated: PedidoUpdatedFun
+    public get setPedidoUpdated(): PedidoUpdatedFun {
+        return this._setPedidoUpdated
+    }
+    public set setPedidoUpdated(value: PedidoUpdatedFun) {
+        this._setPedidoUpdated = value
+    }
+
+    constructor(id: number, data: Date, produtos: Produto[], enderecoEntrega: string, valorFrete: number, valorTotal: number, status: string) {
+        this.id = id
         this.data = data
         this.produtos = produtos
         this.enderecoEntrega = enderecoEntrega
         this.valorFrete = valorFrete
         this.valorTotal = valorTotal
         this.status = status
+        this._setPedidoUpdated = (newPedidoUpdated: boolean) => { }
+    }
+
+    handleRastrear = async (event: any) => {
+        event.preventDefault()
+        alert(`Rastreando pedido ${this.id}`)
+
+        // const response = await fetch(`http://localhost:3000/api/pedidos/${this.id}`);
+        // const data = await response.json();
+
+        // this.status = data.status;
+        this.status = 'Entregue'
+        this.setPedidoUpdated(true)
     }
 
     // Returns the JSX for the table row
@@ -37,7 +63,7 @@ class Pedido {
                         {this.produtos.map(produto => produto.getJSX())}
                     </table>
                 </li>
-                <br />
+                <button id={`btnRastrear${this.id}`} onClick={this.handleRastrear}>Rastrear</button>
             </ul>
         )
     }
