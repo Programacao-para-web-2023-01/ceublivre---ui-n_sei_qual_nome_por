@@ -13,20 +13,20 @@ const Pedidos = () => {
     // Fetches the data from the API
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch("http://localhost:3000/api/pedidos");
+            const response = await fetch("http://localhost:8000/pedidos/");
             const data = await response.json();
 
             const newPedidos = data.map((raw_data: any) => {
                 const pedido = new Pedido(
                     raw_data.id,
-                    new Date(raw_data.data),
+                    new Date(raw_data.criado_em),
                     raw_data.produtos.map(
-                        (produto: { nome: string; preco: number; quantidade: number }) =>
-                            new Produto(produto.nome, produto.preco, produto.quantidade)
+                        (produto: { nome: string; estoque: number }) =>
+                            new Produto(produto.nome, produto.estoque)
                     ),
-                    raw_data.enderecoEntrega,
-                    raw_data.valorFrete,
-                    raw_data.valorTotal,
+                    raw_data.endereco_entrega,
+                    raw_data.valor_frete,
+                    raw_data.valor_total,
                     raw_data.status
                 );
                 pedido.setPedidoUpdated = setPedidoUpdated;

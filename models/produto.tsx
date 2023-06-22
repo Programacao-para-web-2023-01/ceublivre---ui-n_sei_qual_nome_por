@@ -2,13 +2,11 @@
 
 class Produto {
     nome: string
-    preco: number
-    quantidade: number
+    estoque: number
 
-    constructor(nome: string, preco: number, quantidade: number) {
+    constructor(nome: string, estoque: number) {
         this.nome = nome
-        this.preco = preco
-        this.quantidade = quantidade
+        this.estoque = estoque
     }
 
     // Returns the JSX for the table row
@@ -16,8 +14,7 @@ class Produto {
         return (
             <tr className="ItemProduto">
                 <td>{this.nome}</td>
-                <td>{this.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-                <td>{this.quantidade}</td>
+                <td>{this.estoque}</td>
             </tr>
         )
     }
